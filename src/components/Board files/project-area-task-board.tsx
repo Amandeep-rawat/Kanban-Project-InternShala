@@ -83,6 +83,7 @@ const ProjectAreaTaskBoard = () => {
             setCurrentHoveringOver(board.name)
             
           }}
+          style={{ touchAction: "none" }}
           
           className={`h-screen max-md:h-[50vh] p-2 border  rounded-lg  ${
             currentHoveringOver === board.name ? "bg-gray-200 dark:bg-gray-800" : ""
