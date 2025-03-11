@@ -13,27 +13,27 @@ const SingleTask = ({ task }: { task:Task }) => {
         e.dataTransfer.setData("id", task.id);
       }}
 
-      onTouchStart={(e) => {
-        const touch = e.touches[0];
-        const target = e.currentTarget;
-        target.setAttribute("data-dragging", "true");
-        target.style.position = "absolute";
-        target.style.left = `${touch.clientX}px`;
-        target.style.top = `${touch.clientY}px`;
-      }}
-      onTouchMove={(e) => {
-        const touch = e.touches[0];
-        const target = e.currentTarget;
-        if (target.getAttribute("data-dragging") === "true") {
-          target.style.left = `${touch.clientX}px`;
-          target.style.top = `${touch.clientY}px`;
-        }
-      }}
-      onTouchEnd={(e) => {
-        e.preventDefault();
-        const target = e.currentTarget;
-        target.removeAttribute("data-dragging");
-      }}
+      // onTouchStart={(e) => {
+      //   const touch = e.touches[0];
+      //   const target = e.currentTarget;
+      //   target.setAttribute("data-dragging", "true");
+      //   target.style.position = "absolute";
+      //   target.style.left = `${touch.clientX}px`;
+      //   target.style.top = `${touch.clientY}px`;
+      // }}
+      // onTouchMove={(e) => {
+      //   const touch = e.touches[0];
+      //   const target = e.currentTarget;
+      //   if (target.getAttribute("data-dragging") === "true") {
+      //     target.style.left = `${touch.clientX}px`;
+      //     target.style.top = `${touch.clientY}px`;
+      //   }
+      // }}
+      // onTouchEnd={(e) => {
+      //   e.preventDefault();
+      //   const target = e.currentTarget;
+      //   target.removeAttribute("data-dragging");
+      // }}
       className="opacity-100 w-full cursor-grab active:cursor-grabbing"
     
     >
