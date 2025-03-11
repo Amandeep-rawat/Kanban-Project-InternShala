@@ -6,21 +6,46 @@ import { ChevronDownCircle, ChevronLeftCircle, ChevronUpCircle } from "lucide-re
 import { Card, CardContent, CardHeader } from "../ui/card"
 import TaskDropDown from "../taskdropdown/TaskDropDown"
 import type { Task } from "@/tasks"
+import { useRef, useEffect } from "react"
 
 interface SingleTaskProps {
   task: Task
   onTouchStart?: (taskId: string, e: React.TouchEvent) => void
+  setTaskRef?: (taskId: string, ref: HTMLDivElement | null) => void
 }
 
-const SingleTask = ({ task, onTouchStart }: SingleTaskProps) => {
+const SingleTask = ({ task, onTouchStart, setTaskRef }: SingleTaskProps) => {
+  const taskRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (setTaskRef && taskRef.current) {
+      setTaskRef(task.id, taskRef.current)
+    }
+
+    return () => {
+      if (setTaskRef) {
+        setTaskRef(task.id, null)
+      }
+    }
+  }, [task.id, setTaskRef])
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (onTouchStart) {
+      // Prevent default to avoid any browser-specific behaviors
+      e.preventDefault()
+      onTouchStart(task.id, e)
+    }
+  }
+
   return (
     <Card
+      ref={taskRef}
       draggable
       onDragStart={(e) => {
         console.log("Dragging Task ID:", task.id)
         e.dataTransfer.setData("id", task.id)
       }}
-      onTouchStart={(e) => onTouchStart && onTouchStart(task.id, e)}
+      onTouchStart={handleTouchStart}
       className="opacity-100 w-full cursor-grab active:cursor-grabbing mb-3"
     >
       <CardHeader className="p-4">

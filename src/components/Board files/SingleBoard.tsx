@@ -8,9 +8,10 @@ import SingleTask from "./SingleTask"
 interface SingleBoardProps {
   board: Board
   onTouchStart?: (taskId: string, e: React.TouchEvent) => void
+  setTaskRef?: (taskId: string, ref: HTMLDivElement | null) => void
 }
 
-const SingleBoard = ({ board, onTouchStart }: SingleBoardProps) => {
+const SingleBoard = ({ board, onTouchStart, setTaskRef }: SingleBoardProps) => {
   const { name: boardName, tasks = [] } = board // Default empty array to avoid errors
   const numberTasks = tasks.length
 
@@ -30,7 +31,7 @@ const SingleBoard = ({ board, onTouchStart }: SingleBoardProps) => {
           </div>
         )}
         {tasks.map((task) => (
-          <SingleTask key={task.id} task={task} onTouchStart={onTouchStart} />
+          <SingleTask key={task.id} task={task} onTouchStart={onTouchStart} setTaskRef={setTaskRef} />
         ))}
       </div>
     </div>
