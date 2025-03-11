@@ -53,7 +53,7 @@ const ProjectAreaTaskBoard = () => {
 
   const handleDrop = (e: React.DragEvent<HTMLDivElement>, boardName: string) => {
     e.preventDefault();
-    e.dataTransfer.dropEffect = "move";
+    
     setCurrentHoveringOver(null);
 
     const id = e.dataTransfer.getData("id");
@@ -76,20 +76,13 @@ const ProjectAreaTaskBoard = () => {
       {boards.map((board, index) => (
         <div
           key={index}
-          onDrop={(e) => {
-            alert("ondrop")
-            handleDrop(e, board.name)
-          }}
-          onDragOver={(e) => {
-            alert("ondragover")
-            e.preventDefault()
-          }} // Allow drop
+          onDrop={(e) => handleDrop(e, board.name)}
+          onDragOver={(e) => e.preventDefault()} // Allow drop
           onDragEnter={() => {
-            alert("ondragenter")
+            console.log("onenter",board.name);
             setCurrentHoveringOver(board.name)
             
           }}
-          style={{ touchAction: "none" }}
           
           className={`h-screen max-md:h-[50vh] p-2 border  rounded-lg  ${
             currentHoveringOver === board.name ? "bg-gray-200 dark:bg-gray-800" : ""
