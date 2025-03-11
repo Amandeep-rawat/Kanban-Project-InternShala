@@ -76,10 +76,16 @@ const ProjectAreaTaskBoard = () => {
       {boards.map((board, index) => (
         <div
           key={index}
-          onDrop={(e) => handleDrop(e, board.name)}
-          onDragOver={(e) => e.preventDefault()} // Allow drop
+          onDrop={(e) => {
+            alert("ondrop")
+            handleDrop(e, board.name)
+          }}
+          onDragOver={(e) => {
+            alert("ondragover")
+            e.preventDefault()
+          }} // Allow drop
           onDragEnter={() => {
-            console.log("onenter",board.name);
+            alert("ondragenter")
             setCurrentHoveringOver(board.name)
             
           }}
