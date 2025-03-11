@@ -53,6 +53,7 @@ const ProjectAreaTaskBoard = () => {
 
   const handleDrop = (e: React.DragEvent<HTMLDivElement>, boardName: string) => {
     e.preventDefault();
+    e.dataTransfer.dropEffect = "move";
     setCurrentHoveringOver(null);
 
     const id = e.dataTransfer.getData("id");
